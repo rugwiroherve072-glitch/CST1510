@@ -20,10 +20,27 @@ Delete these instructions as you replace them with your code.
 #    Typical   : add a method status(self) that returns "OVER LIMIT" (100%+),
 #                "WARNING" (90%+) or "OK", worked out from self.value and
 #                self.limit. Give it a one-line docstring.
-#    Excellent : also add over_limit_count as a class-level running total -
-#                see the note below.
+#    Excellent : also add over_limit_count as a class-level running total.
 
-# your class goes here
+class Record:
+    over_limit_count = 0
+
+    def __init__(self, label, value, limit):
+        """Store this record's label, value, and limit."""
+        self.label = label
+        self.value = value
+        self.limit = limit
+        if value >= limit:
+            Record.over_limit_count += 1
+
+    def status(self):
+        """Return this record's status based on its value and limit."""
+        percentage = (self.value / self.limit) * 100
+        if percentage >= 100:
+            return "OVER LIMIT"
+        if percentage >= 90:
+            return "WARNING"
+        return "OK"
 
 
 # ==================================================================== RECORDS
@@ -32,10 +49,22 @@ Delete these instructions as you replace them with your code.
 #    Threshold : create at least 2 Record instances directly in the code.
 #    Typical   : same, but now print each one's .status() as well.
 #    Excellent : instead, write load_records(path) that reads label,value,limit
-#                lines from a file and returns a list of Record objects. Make
-#                your own data file, one record per line.
+#                lines from a file and returns a list of Record objects.
 
-records = []   # replace with your code
+from pathlib import Path
+
+
+def load_records(path):
+    """Load records from a comma-separated data file."""
+    records = []
+    with open(path) as file:
+        for line in file:
+            label, value, limit = line.strip().split(",")
+            records.append(Record(label, float(value), float(limit)))
+    return records
+
+
+records = load_records("records_sample.txt")
 
 
 # ==================================================================== OUTPUT
@@ -55,10 +84,14 @@ for record in records:
     print(f"  RECORD CHECK  -  {record.label}")
     print("=" * 34)
 
-    # your report lines go here
+    print(f"  Value      : {record.value}")
+    print(f"  Limit      : {record.limit}")
+    print(f"  Status     : {record.status()}")
 
     print("=" * 34)
 
+print()
+print(f"{Record.over_limit_count} of {len(records)} records are OVER LIMIT")
 
 # ==========================================================================
 # 4. Before you finish:
