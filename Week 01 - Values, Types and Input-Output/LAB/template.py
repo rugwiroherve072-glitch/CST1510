@@ -21,9 +21,9 @@ Delete these instructions as you replace them with your code.
 #
 #    Remember: input() always gives back text.
 
-DatasetName = str(input("Enter a dataset name: "))     # : replace with an input() call
-Rowloaded= float(str(input("Enter the row loaded: ")))     # : replace with an input() call, converted
-Rowexpected= float(str(input("Enter the row expected: ")))   # : replace with an input() call, converted
+label = str(input("Enter a dataset name: "))     # : replace with an input() call
+first= float(str(input("Enter the row loaded: ")))     # : replace with an input() call, converted
+second= float(str(input("Enter the row expected: ")))   # : replace with an input() call, converted
 
 
 # ================================================================== PROCESS
@@ -34,8 +34,8 @@ Rowexpected= float(str(input("Enter the row expected: ")))   # : replace with an
 #
 #    Do not type the answers. Calculate them.
 
-difference = Rowexpected - Rowloaded   # 
-percent = difference/ Rowexpected * 100     # 
+difference = second - first   # 
+percent = first / second * 100     # 
 
 
 # =================================================================== OUTPUT
@@ -50,7 +50,7 @@ percent = difference/ Rowexpected * 100     #
 
 print()
 print("=" * 34)
-print(f"  RECORD CHECK  -  {DatasetName}")
+print(f"  RECORD CHECK  -  {label}")
 print("=" * 34)
 
 # : your report lines go here
@@ -58,8 +58,8 @@ print("=" * 34)
 print("=" * 34)
 
 
-print(f"Row loaded   : {Rowloaded:>15.2f}")
-print(f"Row expected : {Rowexpected:>15.2f}")
+print(f"Row loaded   : {first:>15.2f}")
+print(f"Row expected : {second:>15.2f}")
 print(f"Difference   : {difference:>+15.2f}")
 print(f"Percent      : {percent:>15.2f}%")
 

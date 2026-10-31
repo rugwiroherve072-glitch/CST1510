@@ -33,7 +33,7 @@ def check(value, limit):
     percent = (value / limit) * 100 if limit != 0 else 0
     return difference, percent
 
-def status_of(percent, warning_at = 90):
+def status_of(percent, warning_at = 90): 
     if percent >= 100:
         return "OVER LIMIT"
     elif percent >= warning_at:
@@ -56,23 +56,18 @@ def print_report(label, value, limit, difference, percent, status):
     print(f"Status     : {status:>10}")
     print("=" * 34)
 
-# ==================================================================== INPUT
-# 2. Ask for your three values.
-#
-#    - the first is TEXT      (a name, a hostname, an IP)  -> no conversion needed
-#    - the second is a NUMBER (use float(), not int())
-#    - the third  is a NUMBER (use float(), not int())
+
 over_limit_count = 0  # Counter for records that are over the limit
 while True:
-    label = str(input("Enter a dataset name(or quit): "))       # replace with an input() call
-    if label == "quit":
+    label = str(input("Enter a dataset name(or quit): "))    # asking user to enter a dataset name or quit   
+    if label == "quit": # check if the user wants to quit the loop
         break
-    value = float(str(input("Enter the row loaded: ")))    # replace with an input() call, converted with float()
-    limit = float(str(input("Enter the row expected: ")))
+    value = float(str(input("Enter the row loaded: ")))  # asking user to enter the row loaded  
+    limit = float(str(input("Enter the row expected: "))) # asking user to enter the row expected
 
-    difference, percent = check(value, limit)
+    difference, percent = check(value, limit) # calling the check function to calculate difference and percent
     status = status_of(percent)
-    if status == "OVER LIMIT":
+    if status == "OVER LIMIT": # increment the counter for records that are over the limit
         over_limit_count += 1
 
     print_report(label, value, limit, difference, percent, status)

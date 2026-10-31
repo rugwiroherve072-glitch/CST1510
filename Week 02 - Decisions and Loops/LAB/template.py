@@ -24,7 +24,7 @@ while True:
 # 2. Work out the difference and the percentage.       [Typical and above]
 
     difference = limit - value   # replace with your calculation
-    percent = (difference / limit * 100) if limit != 0 else 0       # replace with your calculation
+    percent = (value / limit * 100) if limit != 0 else 0       # replace with your calculation
 # 3. Decide a status and store it in a variable called status.
 #
 #    Threshold : if / else        -> "OVER LIMIT" or "OK"
